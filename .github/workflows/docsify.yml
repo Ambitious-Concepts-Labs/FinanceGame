@@ -1,8 +1,8 @@
-name: Deploy Docs to GitHub Pages
+name: Deploy Docsify site to GitHub Pages
 
 on:
   push:
-    branches: ["master", "main"]
+    branches: ["master"]
   workflow_dispatch:
 
 permissions:
@@ -20,36 +20,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Optional: Detect mdBook vs Docsify automatically
-      - name: Set site type
-        id: detect
-        run: |
-          cd docs
-          if [ -f book.toml ]; then
-            echo "type=mdbook" >> $GITHUB_OUTPUT
-          elif [ -f index.html ] && grep -q "docsify" index.html; then
-            echo "type=docsify" >> $GITHUB_OUTPUT
-          else
-            echo "No recognized docs site found."
-            exit 1
-          fi
-
-      - name: Install mdBook (if needed)
-        if: steps.detect.outputs.type == 'mdbook'
-        run: |
-          curl https://sh.rustup.rs -sSf | sh -s -- -y
-          source "$HOME/.cargo/env"
-          cargo install mdbook
-          mdbook build
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload artifact
+      - name: Upload Docsify site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: |
-            ${{ steps.detect.outputs.type == 'mdbook' && './book' || '.' }}
+          path: ./docs
 
   deploy:
     environment:
