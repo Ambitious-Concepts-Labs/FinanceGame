@@ -37,6 +37,13 @@ http://localhost:3000
   - `_sidebar.md` - Navigation sidebar configuration
   - `README.md` - Documentation home page
   - `/week1` - Week 1 course materials
+  - `/week2` - Week 2 course materials
+  - `/week3` - Week 3 course materials
+  - `/week4` - Week 4 course materials
+  - `/week5` - Week 5 course materials
+  - `/week6` - Week 6 course materials
+  - `/week7` - Week 7 course materials
+  - `/week8` - Week 8 course materials
 
 ## Contributing
 
